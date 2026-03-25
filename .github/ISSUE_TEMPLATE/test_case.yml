@@ -14,7 +14,7 @@ body:
     id: tc_id
     attributes:
       label: 🆔 Mã Test Case (Tùy chọn)
-      description: Nhập mã định danh nếu bạn có hệ thống đánh mã riêng (VD: TC-API-001).
+      description: Nhập mã định danh nếu bạn có hệ thống đánh mã riêng.
       placeholder: TC-001
 
   - type: dropdown
