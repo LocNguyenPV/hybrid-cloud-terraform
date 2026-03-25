@@ -1,0 +1,108 @@
+name: 🧪 Test Case
+description: Tạo một kịch bản kiểm thử (Test Case) mới cho dự án
+title: "[TEST]: <Tên_ngắn_gọn_của_Test_Case>"
+labels: ["test-case", "needs-triage"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Vui lòng điền đầy đủ các thông tin bên dưới để mô tả chi tiết kịch bản kiểm thử. 
+        *Lưu ý: Các trường có dấu sao (*) là bắt buộc.*
+
+  - type: input
+    id: tc_id
+    attributes:
+      label: 🆔 Mã Test Case (Tùy chọn)
+      description: Nhập mã định danh nếu bạn có hệ thống đánh mã riêng (VD: TC-API-001).
+      placeholder: TC-001
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: 🧩 Component / Module
+      description: Test case này kiểm thử thành phần nào của hệ thống?
+      options:
+        - API Services (.NET / C#)
+        - Background Worker / Message Queue (RabbitMQ)
+        - Database / Caching (SQL Server / Redis)
+        - Infrastructure / CI/CD (Kubernetes / Jenkins / ArgoCD)
+        - Frontend / UI
+        - Khác
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 🚨 Mức độ ưu tiên (Priority)
+      options:
+        - 🔴 High (Critical path, luồng chính của hệ thống)
+        - 🟡 Medium (Các edge cases quan trọng)
+        - 🟢 Low (UI/UX, text typo, luồng ít dùng)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: test_type
+    attributes:
+      label: ⚙️ Loại kiểm thử (Test Type)
+      options:
+        - Functional Testing (Kiểm thử chức năng)
+        - Integration Testing (Kiểm thử tích hợp)
+        - Performance / Load Testing (Kiểm thử hiệu năng)
+        - Security Testing (Kiểm thử bảo mật)
+    validations:
+      required: true
+
+  - type: textarea
+    id: preconditions
+    attributes:
+      label: 🚦 Điều kiện tiên quyết (Pre-conditions)
+      description: Trạng thái hệ thống cần có trước khi thực hiện test case này.
+      placeholder: |
+        Ví dụ: 
+        - Service RabbitMQ đang up và chạy ở port 5672.
+        - Đã có sẵn 1 user hợp lệ trong database SQL Server với role Admin.
+        - Container Redis đang hoạt động bình thường.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 👣 Các bước thực hiện (Test Steps)
+      description: Mô tả chi tiết từng bước để tái hiện kịch bản.
+      placeholder: |
+        1. Gửi request POST đến endpoint `/api/v1/documents` với payload hợp lệ.
+        2. Kiểm tra response HTTP status code.
+        3. Truy cập vào RabbitMQ Management UI, kiểm tra xem message có được đẩy vào queue `doc_processing` hay không.
+        4. Check log của background worker.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_result
+    attributes:
+      label: ✅ Kết quả mong đợi (Expected Result)
+      description: Hệ thống phản hồi như thế nào thì test case này được coi là PASS?
+      placeholder: |
+        - Trả về HTTP 201 Created.
+        - Message xuất hiện trong queue `doc_processing` với định dạng JSON chuẩn.
+        - Dữ liệu được lưu chính xác vào Redis cache.
+    validations:
+      required: true
+
+  - type: textarea
+    id: test_data
+    attributes:
+      label: 💾 Dữ liệu kiểm thử (Test Data)
+      description: Các file đính kèm, JSON payload, hoặc tài khoản dùng để test (Không nhập mật khẩu thật hoặc dữ liệu nhạy cảm).
+      value: |
+        ```json
+        {
+          // Nhập payload mẫu vào đây
+        }
+        ```
+    validations:
+      required: false
